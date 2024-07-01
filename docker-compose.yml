@@ -1,0 +1,25 @@
+services:
+  jobmanager:
+    image: flink:1.19.1-scala_2.12-java17
+    hostname: jobmanager
+    ports:
+      - "8081:8081"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    command: jobmanager
+    volumes:
+      - /home/minhyeok/flink/jobs:/flink/jobs
+
+  taskmanager:
+    image: flink:1.19.1-scala_2.12-java17
+    hostname: taskmanager
+    depends_on:
+      - jobmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    command: taskmanager
+    deploy:
+      replicas: 2
+    volumes:
+      - /home/minhyeok/flink/jobs:/flink/jobs
+
