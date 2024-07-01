@@ -8,7 +8,7 @@ services:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
     command: jobmanager
     volumes:
-      - /home/minhyeok/flink/jobs:/flink/jobs
+      - ./jobs:/flink/jobs
 
   taskmanager:
     image: flink:1.19.1-scala_2.12-java17
@@ -21,5 +21,5 @@ services:
     deploy:
       replicas: 2
     volumes:
-      - /home/minhyeok/flink/jobs:/flink/jobs
+      - ./jobs:/flink/jobs
 
